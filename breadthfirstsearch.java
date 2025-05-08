@@ -1,6 +1,8 @@
 package trees;
 
-public class nthlevel {
+import java.util.*;
+
+public class breadthfirstsearch {
     public static class Node {
         int val;
         Node left;
@@ -11,15 +13,19 @@ public class nthlevel {
         }
     }
 
-    public static void nthlev(Node root, int n) {
-        if (root == null)
-            return;
-        if (n == 1) {
-            System.out.print(root.val + " ");
-            return;
+    public static void bfs(Node root) {
+        Queue<Node> q = new LinkedList<>();
+        if (root != null)
+            q.add(root);
+        while (q.size() > 0) {
+            Node temp = q.peek();
+            if (temp.left != null)
+                q.add(temp.left);
+            if (temp.right != null)
+                q.add(temp.right);
+            System.out.println(temp.val + " ");
+            q.remove();
         }
-        nthlev(root.left, n - 1);
-        nthlev(root.right, n - 1);
     }
 
     public static void main(String[] args) {
@@ -36,6 +42,6 @@ public class nthlevel {
         Node f = new Node(7);
         b.left = e;
         b.right = f;
-        nthlev(root, 3);
+        bfs(root);
     }
 }
